@@ -6,8 +6,7 @@
                 <article class="col-md-6 col-md-offset-3 text-center foot-logo">
 
                     <p class="friend-links">
-                        <a href="{{ url('/company/about') }}">公司主页</a>
-                        <a href="#">B站点</a>
+                        <a href="http://172.104.67.21" target="_blank">XX有限公司主页</a>
                     </p>
 
                     <a href="#"><img alt="" title="" src="/assets/images/icon.png" /></a>
@@ -27,7 +26,7 @@
                         由 <a href="https://github.com/huangyibo" target="_blank">Bobo</a> 设计与编码。
                         <hr style="border-top: 1px solid #4c4c4c;width: 320px;">
                         <a href="#" style="color:#a5a5a5">
-                            {{--<img class="brand-icon" src="https://dn-phphub.qbox.me/uploads/images/201612/12/1/iq7WQc2iuW.png" >--}}
+                            {{--<img class="brand-icon" src="" >--}}
                             <span style="margin-top: 7px;display: inline-block;">
                                 Copyright &copy;2017 活动发布系统. | Code licensed under MIT.
                             </span>
