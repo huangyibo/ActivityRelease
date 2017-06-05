@@ -10,6 +10,7 @@ var basejs = [
     'resources/assets/js/vendor/simplemde.min.js',
     'resources/assets/js/vendor/analytics.js',
     'resources/assets/js/vendor/jquery.form.min.js',
+    'resources/assets/js/vendor/iziToast.min.js',
     // 'resources/assets/js/vendor/analytics.js',
     // 'resources/assets/js/vendor/moment.min.js',
     // 'resources/assets/js/vendor/upload-image.js',
@@ -39,11 +40,14 @@ elixir(function(mix) {
 
         .sass([
             'base.scss',
-            'main.scss'
+            'main.scss',
+            'post_create_edit.scss'
         ], 'public/assets/css/styles.css')
 
         .scripts(basejs.concat([
             'resources/assets/js/main.js',
+            'resources/assets/js/post_create_edit.js',
+            'resources/assets/js/post_show_apply.js'
         ]), 'public/assets/js/scripts.js', './')
 
         .version([

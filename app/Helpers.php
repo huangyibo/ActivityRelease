@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Str;
+use Illuminate\View\Expression;
+
 // 如：db:seed 或者 清空数据库命令的地方调用
 function insanity_check()
 {
@@ -109,6 +112,58 @@ function time_show($time)
         }
     }
     return $time_result;
+}
+
+function format_time($time){
+    return date("Y年m月d日 H:i", strtotime($time));
+}
+
+
+function is_http_url($url){
+    return \Illuminate\Support\Str::startsWith($url, 'http');
+}
+
+function parseApplyTemplates($applyTemplates){
+    $result = '';
+    foreach ($applyTemplates as $applyTemplate){
+        $html = '<div class="form-group">';
+        $html += '<label for="'+ $applyTemplate->apply_attr_id +'" class="control-label">';
+        if ($applyTemplate->is_required){
+            $html += '<span style="color: red;">*</span>';
+        }
+        $html += $applyTemplate->apply_attr->attr_slug +'</label>';
+        if (is_null($applyTemplate->apply_attr->attr_type)){
+            $applyTemplate->apply_attr->attr_type = 'text';
+        }
+
+        switch ($applyTemplate->apply_attr->attr_type){
+            case 'textarea':
+                $html += '<textarea class="form-control" id="'+ $applyTemplate->apply_attr_id
+                    +'" name="'+ $applyTemplate->apply_attr->attr_name + '" rows="3" placeholder="'+
+                    $applyTemplate->apply_attr->attr_slug +'"></textarea>';
+                break;
+            default:
+                $html += '<input type="' + $applyTemplate->apply_attr->attr_type + '" class="form-control" id="' +
+                    $applyTemplate->apply_attr_id + '" name="' + $applyTemplate->apply_attr->attr_name + '" placeholder="'+
+                    $applyTemplate->apply_attr->attr_slug + '" ';
+                if ($applyTemplate->is_required){
+                    $html += 'required';
+                }
+                $html += '>';
+                break;
+        }
+        $html += '</div>';
+        $result += $html;
+    }
+    return new Expression($result);
+}
+
+function is_existed($data){
+    return (isset($data) && count($data)>0);
+}
+
+function format_datetime_local($data){
+    return date('Y-m-d', strtotime($data)).'T'.date('H:i', strtotime($data));
 }
 
 function posts_show_form($post){

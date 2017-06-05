@@ -14,10 +14,13 @@ class StoreApplicantRequest extends Request
     public function rules()
     {
         return [
-            'post_id'  => 'alpha_num|required',
+            /*'post_id'  => 'alpha_num|required',
             'name'     => 'string|required|min:2',
             'email'   => 'email|required',
-            'phone'   => 'string|required',
+            'phone'   => 'string|required',*/
         ];
     }
+
+
+
 }

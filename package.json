@@ -9,6 +9,7 @@
     "bootstrap-sass": "^3.3.7",
     "bootstrap-tagsinput": "^0.7.1",
     "font-awesome": "^4.1.0",
+    "izitoast": "^1.1.1",
     "laravel-elixir": "^4.2.1",
     "node-sass": "^4.5.0",
     "social-share.js": "^1.0",
@@ -20,6 +21,6 @@
   "description": "Basic Framework",
   "version": "1.0.0",
   "main": "gulpfile.js",
-  "author": "Monkey",
+  "author": "Bob Huang",
   "license": "MIT"
 }

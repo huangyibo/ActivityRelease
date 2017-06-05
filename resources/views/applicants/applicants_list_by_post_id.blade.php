@@ -1,69 +1,112 @@
 <ol class="breadcrumb">
     <li><a class="user-center-link" title="个人中心" href="{{ url('users/'.$user->id.'/posts/released') }}">个人中心</a></li>
-    <li class="active">{{ $post->title.' - ( '.count($applicants).'人报名 )' }}</li>
+    <li class="active">{{ $post->title.' - ( '.$post->apply_num.'人报名 )' }}</li>
 </ol>
 
 <div class="panel panel-default">
+    @if(isset($postPhases) && count($postPhases) > 0)
+        <div class="panel-title panel-info">
+            活动阶段详情
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
 
-    <div class="panel-body">
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>姓名</th>
-                    <th>邮箱</th>
-                    <th>手机号码</th>
-                    <th>公司</th>
-                    <th>职位</th>
-                    <th>报名时间</th>
-                    <th>备注</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($applicants as $applicant)
+                <table class="table table-striped table-hover">
+                    <thead>
                     <tr>
-                        <td>
-                            <a title="{{$applicant->name}}">
-                                {{ $applicant->name }}
-                            </a>
-                        </td>
-                        <td title="{{$applicant->email}}">
-                            <a>
-                                {{ $applicant->email }}
-                            </a>
-                        </td>
-                        <td title="{{ $applicant->phone }}">
-                            <a>
-                                {{ $applicant->phone }}
-                            </a>
-                        </td>
-                        <td title="{{ $applicant->company_name }}">
-                            <a>
-                                {{ $applicant->company_name }}
-                            </a>
-                        </td>
-                        <td title="{{ $applicant->position }}">
-                            <a>
-                                {{ $applicant->position }}
-                            </a>
-                        </td>
-                        <td title="{{ $applicant->created_at }}">
-                            <a>
-                                {{ time_show($applicant->created_at) }}
-                            </a>
-                        </td>
-                        <td title="{{ $applicant->message_text }}">
-                            <a>
-                                {{ $applicant->message_text }}
-                            </a>
-                        </td>
+                        <th>阶段名称</th>
+                        <th style="width: 30%;">时间</th>
+                        <th>报名费用<br>(单位/日元)</th>
+                        <th>名额限制</th>
                     </tr>
-                @endforeach
+                    </thead>
+                    <tbody>
+                    @foreach($postPhases as $postPhase)
+                        <tr>
+                            <td title="{{ '第'.$postPhase->serial_num.'阶段' }}">
+                                {{ '第'.$postPhase->serial_num.'阶段' }}
+                            </td>
+                            <td style="width: 30%;"
+                                title="{{ format_time($postPhase->start_time).'--'.format_time($postPhase->end_time) }}">
+                                {{ format_time($postPhase->start_time)}} <br>
+                                至<br>
+                                {{ format_time($postPhase->end_time) }}
+                            </td>
+                            <td title="{{ $postPhase->registration_fee.'日元' }}">
+                                {{ $postPhase->registration_fee }}
+                            </td>
+                            <td title="{{ $postPhase->register_limit.'人' }}">
+                                {{ $postPhase->register_limit.'人' }}
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
 
-                </tbody>
-            </table>
+            </div>
+        </div>
+    @endif
+</div>
+@if(isset($applyTemplates) && count($applyTemplates) > 0)
+    <div class="panel panel-default">
+
+        <div class="panel-title">
+            活动报名详情
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        @foreach($applyTemplates as $applyTemplate)
+                            <th>{{ $applyTemplate->apply_attr->attr_slug }}</th>
+                        @endforeach
+                        <th>报名阶段</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($applicants as $applicant)
+                        <tr>
+                            @foreach($applyTemplates as $applyTemplate)
+                                <td>
+                                    @if(isset($applicant->applicant_details[$applyTemplate->apply_attr_id]))
+                                        <a title="{{$applicant->applicant_details[$applyTemplate->apply_attr_id]}}">
+                                            {{$applicant->applicant_details[$applyTemplate->apply_attr_id]}}
+                                        </a>
+                                    @else
+                                        <a title="">
+                                            无
+                                        </a>
+                                    @endif
+                                </td>
+                            @endforeach
+                            <td>
+                                <a>
+                                    @foreach($applicant->applicant_phases as $phase)
+                                        @foreach($postPhases as $postPhase)
+                                            @if($phase->post_phase_id == $postPhase->id)
+                                                {{ '第'.$postPhase->serial_num.'阶段' }}
+                                            @endif
+                                        @endforeach
+                                        <br>
+                                    @endforeach
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
-
+        <div class="panel-footer" style="width: 100%;">
+                <span class="pull-right">
+                    {!! $applicants->render() !!}
+                </span>
+        </div>
     </div>
-</div>
+@else
+    <span style="color: red"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;该活动不需要线上报名。</span>
+@endif

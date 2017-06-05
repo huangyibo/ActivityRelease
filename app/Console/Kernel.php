@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
         Commands\SendIssueToUser::class,
 
         Commands\TopicToLinkCommand::class,
+        Commands\SendMailCommand::class, //测试发邮件脚本
     ];
 
     /**

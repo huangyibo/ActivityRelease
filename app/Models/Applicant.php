@@ -12,15 +12,48 @@ class Applicant extends BaseModel
         return $this->belongsTo(Post::class);
     }
 
-    public static function listApplicantsByPostId($post_id){
-        if ($post_id){
-            return static::where('post_id', $post_id)
-                ->ordered()
-                ->get();
+    public function applicantPhases()
+    {
+        return $this->hasMany(ApplicantPhase::class);
+    }
+
+    public function applicantDetails()
+    {
+        return $this->hasMany(ApplicantDetail::class);
+    }
+
+    public static function listApplicantsByPostId($post_id = 0, $page_size = 0){
+        if ($post_id > 0){
+            if ($page_size > 0){
+                return static::where('post_id', $post_id)
+                    ->orderBy('created_at', 'asc')
+                    ->paginate($page_size);
+
+            }else{
+                return static::where('post_id', $post_id)
+                    ->orderBy('created_at', 'asc')
+                    ->get();
+            }
+
         } else{
-            return static::orderd()
-                ->get();
+            if ($page_size > 0){
+                return static::orderBy('created_at', 'asc')
+                    ->paginate($page_size);
+
+            }else{
+                return static::orderBy('created_at', 'asc')
+                    ->get();
+            }
+
         }
+    }
+
+    public static function applicantDetailsByApplicantId($applicant_id = 0, $page_size = 0){
+        return ApplicantDetail::listApplicantDetailsByApplicantId($applicant_id, $page_size);
+    }
+
+    public static function applicantPhasesByApplicantId($applicant_id = 0, $page_size = 0){
+        return ApplicantPhase::listApplicantPhasesByApplicantId($applicant_id, $page_size);
     }
 
     public function updatedAt()

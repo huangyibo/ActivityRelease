@@ -37,7 +37,7 @@ Route::post('users/{id}/update_password', 'UsersController@update_password');
 Route::get('test', 'UsersController@test');
 
 Route::get('users/{id}/posts/released', 'UsersController@userReleasedPosts');
-Route::get('users/{id}/posts/apply_detail', 'UsersController@userReleasedPosts');
+Route::get('users/{id}/posts/apply_detail', 'UsersController@postDetailsList');
 
 Route::get('posts/{post_id}/applicants', 'ApplicantsController@listByPostId');
 Route::post('posts/cover/upload', 'PostController@uploadCover');
@@ -48,6 +48,8 @@ Route::resource('categories', 'CategoryController', ['only' => ['show']]);
 
 Route::resource("issues","IssueController", ['only' => ['show', 'index']]);
 Route::resource("applicants", 'ApplicantsController', ['only' => ['store']]);
+
+Route::resource('post_phases', 'PostPhaseController', ['only' => ['destroy']]);
 
 // update user
 //Route::post('users/{id}/update', 'UsersController@update');

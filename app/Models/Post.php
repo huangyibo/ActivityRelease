@@ -23,6 +23,21 @@ class Post extends BaseModel
         return $this->belongsTo(Category::class);
     }
 
+    public function applyTemplates()
+    {
+        return $this->hasMany(ApplyTemplate::class);
+    }
+
+    public function applicants()
+    {
+        return $this->hasMany(Applicant::class);
+    }
+
+    public function postPhases()
+    {
+        return $this->hasMany(PostPhase::class);
+    }
+
     public function setBodyOriginalAttribute($value)
     {
         $this->attributes['body'] = $value;
@@ -52,6 +67,31 @@ class Post extends BaseModel
         return $query->where('issue_id', '0');
     }
 
+    public static function listPostsByUserId($user_id = 0, $page_size = 0)
+    {
+        if ($user_id>0){
+            if ($page_size >0){
+                return static::where('user_id', $user_id)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate($page_size);
+            }else{
+                return static::where('user_id', $user_id)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            }
+        }
+        return [];
+        /*else{
+            if ($page_size >0){
+                return static::orderBy('created_at', 'desc')
+                    ->simplePaginate($page_size);
+            }else{
+                return static::orderBy('created_at', 'desc')
+                    ->get();
+            }
+        }*/
+    }
+
     public static function issuePostsByCid($cid, $issue_id = 0)
     {
         if ($issue_id == 0) {
@@ -70,6 +110,22 @@ class Post extends BaseModel
 
     }
 
+    public static function applicantsByPostId($post_id = 0, $page_size = 0)
+    {
+        return Applicant::listApplicantsByPostId($post_id, $page_size);
+    }
+
+    public static function postPhasesByPostId($post_id = 0, $page_size = 0)
+    {
+        return PostPhase::listPostPhasesByPostId($post_id, $page_size);
+    }
+
+    public static function applyTemplatesByPostId($post_id = 0, $page_size = 0)
+    {
+        return ApplyTemplate::listApplyTemplatesByPostId($post_id, $page_size);
+    }
+
+
     public function updatedAt()
     {
         return $this->formatDate($this->updated_at);
@@ -80,7 +136,6 @@ class Post extends BaseModel
         return $this->formatDate($this->created_at);
     }
 
-
     private function formatDate($date)
     {
         if (Carbon::now() < Carbon::parse($date)->addDays(10)) {
@@ -89,5 +144,6 @@ class Post extends BaseModel
 
         return Carbon::parse($date)->diffForHumans();
     }
+
 
 }

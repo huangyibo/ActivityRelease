@@ -131,4 +131,9 @@ class User extends BaseModel implements AuthenticatableContract,
 
         return Carbon::parse($date)->diffForHumans();
     }
+
+    public static function postsByUserId($user_id = 0, $page_size = 0)
+    {
+        return Post::listPostsByUserId($user_id, $page_size);
+    }
 }

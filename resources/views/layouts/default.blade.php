@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="活动发布系统。">
     <meta name="author" content="Bob">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="shortcut icon" href="/assets/images/favicon.png">
 
@@ -23,9 +24,9 @@
     @yield('head-asset')
 
 </head>
-
+{{--onLoad="Resize()" onResize="Resize()"--}}
 <body class="{{ route_class() }}-page">
-
+<div class="alert"></div>
 @include('layouts.partials.topnav')
 
 <section class="mastwrap">

@@ -136,4 +136,18 @@ class UsersController extends Controller
         return view('users.user_center', compact('user', 'posts'));
     }
 
+    public function postDetailsList($id)
+    {
+        $user = User::findOrFail($id);
+        $posts = User::postsByUserId($id, 10);
+//        $posts_with_apply_templates = array();
+        foreach ($posts as $post){
+            $applyTemplates = Post::applyTemplatesByPostId($post->id);
+            $post->apply_templates = $applyTemplates;
+//            $posts_with_apply_templates[] = $post;
+        }
+//        $posts = $posts_with_apply_templates;
+        return view('users.user_center', compact('user', 'posts'));
+    }
+
 }
