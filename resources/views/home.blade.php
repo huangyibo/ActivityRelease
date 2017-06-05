@@ -1,6 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
+@if($big_banner != null and count($side_banner) >0)
     <div class="row add-top">
         <article class="col-md-9 pic-block big-block">
             <a class="shodow-box" href="{{ route('posts.show', [$big_banner->id]) }}">
@@ -22,7 +23,7 @@
         @endforeach
 
     </div>
-
+@endif
     @if (count($posts['news_posts']) > 0)
         @include('_home_cell', ['section_title' => '最新活动', 'posts' => $posts['news_posts'], 'category_id' => 1])
     @endif
@@ -38,6 +39,5 @@
     @if (count($posts['meetup']) > 0)
         @include('_home_cell', ['section_title' => '线下聚会', 'posts' => $posts['meetup'], 'category_id' => 6])
     @endif
-
 
 @endsection

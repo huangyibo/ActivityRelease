@@ -119,6 +119,7 @@
 
             </article>
 
+           @if($post->user)
             <div class="about-author clearfix">
                 <a href="{{ route('users.show', $post->user->id) }}">
                     <img src="{{ $post->user->avatar ? $post->user->present()->gravatar(150):'https://dn-phphub.qbox.me/uploads/avatars/12985_1489306555.jpeg?imageView2/1/w/100/h/100' }}"
@@ -138,6 +139,7 @@
                     </div>
                 </div>
             </div>
+            @endif
 
             <div class="bg-white recomanded-box">
                 @include('_home_cell', ['section_title' => '近期活动', 'posts' => $posts])

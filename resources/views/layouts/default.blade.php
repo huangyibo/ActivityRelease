@@ -6,6 +6,7 @@
     <title>@yield('title')活动发布平台</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="活动发布系统。">
     <meta name="author" content="Bob">
 
