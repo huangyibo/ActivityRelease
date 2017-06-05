@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Mail Driver
@@ -14,9 +13,7 @@ return [
     | Supported: "smtp", "mail", "sendmail", "mailgun", "mandrill", "ses", "log"
     |
     */
-
-    'driver' => env('MAIL_DRIVER', env('MAIL_DRIVER')),
-
+    'driver' => env('MAIL_DRIVER', 'smtp'),
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
@@ -27,9 +24,7 @@ return [
     | the Mailgun mail service which will provide reliable deliveries.
     |
     */
-
-    'host' => env('MAIL_HOST', env('MAIL_HOST')),
-
+    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Port
@@ -40,9 +35,7 @@ return [
     | stay compatible with the Mailgun e-mail application by default.
     |
     */
-
-    'port' => env('MAIL_PORT', env('MAIL_PORT')),
-
+    'port' => env('MAIL_PORT', 587),
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address
@@ -53,12 +46,10 @@ return [
     | used globally for all e-mails that are sent by your application.
     |
     */
-
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', env('MAIL_FROM_ADDRESS')),
-        'name'    => env('MAIL_FROM_NAME', env('MAIL_FROM_NAME')),
+        'address' => env('MAIL_FROM_ADDRESS', null),
+        'name'    => env('MAIL_FROM_NAME', 'PHPHub'),
     ],
-
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol
@@ -69,9 +60,7 @@ return [
     | transport layer security protocol should provide great security.
     |
     */
-
-    'encryption' => env('MAIL_ENCRYPTION', env('MAIL_ENCRYPTION')),
-
+    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Username
@@ -82,9 +71,7 @@ return [
     | connection. You may also set the "password" value below this one.
     |
     */
-
     'username' => env('MAIL_USERNAME'),
-
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Password
@@ -95,9 +82,7 @@ return [
     | connection so that the application will be able to send messages.
     |
     */
-
     'password' => env('MAIL_PASSWORD'),
-
     /*
     |--------------------------------------------------------------------------
     | Sendmail System Path
@@ -108,9 +93,7 @@ return [
     | been provided here, which will work well on most of your systems.
     |
     */
-
     'sendmail' => '/usr/sbin/sendmail -bs',
-
     /*
     |--------------------------------------------------------------------------
     | Mail "Pretend"
@@ -121,7 +104,5 @@ return [
     | you may inspect the message. This is great for local development.
     |
     */
-
-    'pretend' => env('MAIL_PRETEND', true),
-
+    'pretend' => env('MAIL_PRETEND', false),
 ];

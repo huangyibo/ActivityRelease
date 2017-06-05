@@ -13,11 +13,15 @@ class StorePostRequest extends Request
 
     public function rules()
     {
+        /*if (Request::ajax()){
+            return [];
+        }*/
         return [
             'title'            => 'string|required',
             'category_id'     => 'alpha_num|required',
             'body_original'   => 'required',
-            'cover_image' => 'image',
+            'excerpt'   => 'required',
+//            'cover_image' => 'image',
         ];
     }
 }

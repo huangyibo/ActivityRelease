@@ -3,62 +3,112 @@
 @section('title', $post->title . ' | ')
 
 @section('content')
-    <div class="modal fade" id="apply_join" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">活动报名</h4>
+    @if(isset($applyTemplates) && count($applyTemplates)>0)
+        <div class="modal fade" id="apply_join" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">活动报名</h4>
+                    </div>
+                    <form method="POST" action="{{ route('applicants.store') }}" accept-charset="UTF-8"
+                          id="applicants-create-form">
+                        <div class="modal-body">
+                           {{-- @include('error')--}}
+                            <div id="apply-post-alert-danger" class="alert alert-danger alert-dismissible hidden" style="height: 40px;padding-left: 20px" role="alert">
+                            </div>
+
+                            {!! csrf_field() !!}
+                            <input id="post_id" type="hidden" name="post_id" value="{{ $post->id }}">
+
+                            @if(isset($postPhases) && count($postPhases)>0)
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        <span style="color: red;">*</span>
+                                        选择活动阶段:
+                                    </label>
+                                </div>
+                                <div id="post_phase_options" style="margin-top: 30px;padding-left:30px; padding-right:20px;">
+                                @foreach($postPhases as $postPhase)
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="post_phase" value="{{$postPhase->id}}" />
+                                        <span>第{{$postPhase->serial_num}}阶段</span>&nbsp;&nbsp;
+                                        <span>报名费用:{{$postPhase->registration_fee}}元 </span>&nbsp;&nbsp;
+                                        <span>时间:{{$postPhase->start_time}}--{{$postPhase->end_time}}</span>
+                                    </div>
+                                @endforeach
+                                </div>
+                            @endif
+                            <div id="help_block_post_phase" class="help-block hidden">
+                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                <span>请选择活动阶段</span>
+                            </div>
+
+                            <div id="apply_attr_info">
+                            @foreach($applyTemplates as $applyTemplate)
+                                <div id="form_group_{{ $applyTemplate->apply_attr->attr_name }}" class="form-group">
+                                    <label for="{{ $applyTemplate->apply_attr_id }}" class="control-label">
+                                        @if($applyTemplate->is_required)
+                                            <span class="required_item" style="color: red;">*</span>
+                                        @endif
+                                        {{ $applyTemplate->apply_attr->attr_slug }}:
+                                    </label>
+                                    <input type="{{ is_null($applyTemplate->apply_attr->attr_type)? 'text': $applyTemplate->apply_attr->apply_type }}"
+                                           class="form-control" id="{{ $applyTemplate->apply_attr_id }}"
+                                           name="{{ $applyTemplate->apply_attr->attr_name }}"
+                                           placeholder="{{ $applyTemplate->apply_attr->attr_slug }}"
+                                            {{ $applyTemplate->is_required ? 'required' : ''}}>
+                                    <div id="help_block_{{ $applyTemplate->apply_attr->attr_name }}" class="help-block hidden">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        <span>{{ $applyTemplate->apply_attr->attr_slug }}不能为空</span>
+                                    </div>
+                                </div>
+                            @endforeach
+                            </div>
+                            {{--<div class="form-group">
+                                <label for="recipient-name" class="control-label"><span
+                                            style="color: red;">*</span>姓名:</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="输入姓名" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="control-label"><span
+                                            style="color: red;">*</span>手机号:</label>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="手机号码" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label"><span
+                                            style="color: red;">*</span>邮箱:</label>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="常用邮箱" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">&nbsp;单位:</label>
+                                <input type="text" class="form-control" id="company_name" name="company_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">&nbsp;职位:</label>
+                                <input type="text" class="form-control" id="position" name="position">
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">&nbsp;备注:</label>
+                                <textarea class="form-control" id="message-text" name="message_text" rows="3"
+                                          placeholder="其它事项请在此备注"></textarea>
+                            </div>--}}
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button id="btn_apply_post_submit" type="button" class="btn btn-primary">提交
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <form method="POST" action="{{ route('applicants.store') }}" accept-charset="UTF-8"
-                      id="applicants-create-form">
-                    <div class="modal-body">
-                        @include('error')
-
-                        {!! csrf_field() !!}
-                        <input type="hidden" name="post_id" value="{{ $post->id }}">
-
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label"><span
-                                        style="color: red;">*</span>姓名:</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="输入姓名" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="control-label"><span
-                                        style="color: red;">*</span>手机号:</label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="手机号码" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label"><span
-                                        style="color: red;">*</span>邮箱:</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="常用邮箱" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label">&nbsp;单位:</label>
-                            <input type="text" class="form-control" id="company_name" name="company_name">
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="control-label">&nbsp;职位:</label>
-                            <input type="text" class="form-control" id="position" name="position">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="control-label">&nbsp;备注:</label>
-                            <textarea class="form-control" id="message-text" name="message_text" rows="3"
-                                      placeholder="其它事项请在此备注"></textarea>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-primary">提交
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+    @endif
+
     <div class="row colom-container">
+
         {{--margin-left: 4.16666666%;--}}
         @if(isset($apply_status))
             <div class="alert alert-success" role="alert">
@@ -82,10 +132,14 @@
                     </section>
 
                     <div class="pull-right">
-                        <span class='label label-success' style="margin-right: 15px;padding: 8px 5px">已报名 <span
-                                    style="font-size: 18px">{{ $post->apply_num }}</span>人</span>
-                        <a href="#" data-toggle="modal" data-target="#apply_join" class="btn btn-primary"
-                           style="color:white">我要报名</a>
+                        @if(isset($applyTemplates) && count($applyTemplates)>0)
+                            <span class='label label-success' style="margin-right: 15px;padding: 8px 5px">已报名 <span
+                                       id="apply_num" style="font-size: 18px">{{ $post->apply_num }}</span>人</span>
+
+                            <a href="#" data-toggle="modal" data-target="#apply_join" class="btn btn-primary"
+                               style="color:white">我要报名</a>
+                        @endif
+
                     </div>
                 </header>
 
@@ -119,25 +173,28 @@
 
             </article>
 
-            <div class="about-author clearfix">
-                <a href="{{ route('users.show', $post->user->id) }}">
-                    <img src="{{ $post->user->avatar ? $post->user->present()->gravatar(150):'https://dn-phphub.qbox.me/uploads/avatars/12985_1489306555.jpeg?imageView2/1/w/100/h/100' }}"
-                         alt="{{ $post->user->name }}"
-                         class="avatar pull-left"></a>
+            @if($post->user)
+                <div class="about-author clearfix">
+                    <a href="{{ route('users.show', $post->user->id) }}">
+                        <img src="{{ $post->user->avatar ? $post->user->present()->gravatar(150):'https://dn-phphub.qbox.me/uploads/avatars/12985_1489306555.jpeg?imageView2/1/w/100/h/100' }}"
+                             alt="{{ $post->user->name }}"
+                             class="avatar pull-left"></a>
 
-                <div class="details">
-                    <div class="author">
-                        作者 <a href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a>
-                    </div>
-                    <div class="meta-info">
-                        <div class="website"><i class="fa fa-globe"></i><a href="{{ $post->user->personal_website }}"
-                                                                           targer="_blank"> 个人中心</a></div>
-                        <div class="introduction"><i class="fa fa-paint-brush"></i>
-                            {{ $post->user->introduction }}
+                    <div class="details">
+                        <div class="author">
+                            作者 <a href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a>
+                        </div>
+                        <div class="meta-info">
+                            <div class="website"><i class="fa fa-globe"></i><a
+                                        href="{{ $post->user->personal_website }}"
+                                        targer="_blank"> 个人中心</a></div>
+                            <div class="introduction"><i class="fa fa-paint-brush"></i>
+                                {{ $post->user->introduction }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
 
             <div class="bg-white recomanded-box">
                 @include('_home_cell', ['section_title' => '近期活动', 'posts' => $posts])

@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label">邮 箱</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="email" name="email" type="text" value="{{ $currentUser->email }}" disabled>
+                                <input class="form-control" id="email" name="email" type="email" value="{{ $currentUser->email }}" disabled>
                             </div>
                             <div class="col-sm-4 help-block">
                                 如：name@website.com
