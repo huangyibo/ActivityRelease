@@ -52,7 +52,7 @@
                             <a id="dLabel" role="button" class="button" data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">
                                 <img class="avatar-topnav" alt="{{Auth::user()->name}}"
-                                     src="{{ Auth::user()->avatar ? Auth::user()->present()->gravatar(150):'https://dn-phphub.qbox.me/uploads/avatars/12985_1489306555.jpeg?imageView2/1/w/100/h/100' }}">
+                                     src="{{ Auth::user()->avatar ? Auth::user()->present()->gravatar(150):'https://dn-phphub.qbox.me/uploads/avatars/1_1479342408.png?imageView2/1/w/200/h/200' }}">
                                 @if (Auth::user()->real_name)
                                     {{ Auth::user()->real_name }}
                                 @elseif(Auth::user()->name)
