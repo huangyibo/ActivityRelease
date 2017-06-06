@@ -58,7 +58,7 @@ class User extends BaseModel implements AuthenticatableContract,
             $driver = $user['github_id'] ? 'github' : 'wechat';
             SiteStatus::newUser($driver);
 
-            dispatch(new SendActivateMail($user));
+//            dispatch(new SendActivateMail($user));
         });
     }
 
