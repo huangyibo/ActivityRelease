@@ -176,7 +176,7 @@
             @if($post->user)
                 <div class="about-author clearfix">
                     <a href="{{ route('users.show', $post->user->id) }}">
-                        <img src="{{ $post->user->avatar ? $post->user->present()->gravatar(150):'https://dn-phphub.qbox.me/uploads/avatars/12985_1489306555.jpeg?imageView2/1/w/100/h/100' }}"
+                        <img src="{{ $post->user->avatar ? $post->user->present()->gravatar(150):'https://dn-phphub.qbox.me/uploads/avatars/1_1479342408.png?imageView2/1/w/200/h/200' }}"
                              alt="{{ $post->user->name }}"
                              class="avatar pull-left"></a>
 
