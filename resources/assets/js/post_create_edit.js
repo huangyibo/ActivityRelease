@@ -14,7 +14,18 @@ function delPostPhase(id) {
         var postPhaseId = Number(text(postPhaseIdDivs[0]));
         delPostPhaseAjax(id, postPhaseId);
     } else {  // natively delete post phase by index
-        delPostPhaseNative();
+        delPostPhaseNative(id);
+    }
+}
+
+function delPostPhaseWithThis(obj) {
+    var id = '#' + obj.parentNode.parentNode.id;
+    var postPhaseIdDivs = $(id + ' > .post_phase_id');
+    if (postPhaseIdDivs.length > 0) {  // ajax delete post phase by post_phase_id
+        var postPhaseId = Number(text(postPhaseIdDivs[0]));
+        delPostPhaseAjax(id, postPhaseId);
+    } else {  // natively delete post phase by index
+        delPostPhaseNative(id);
     }
 }
 
@@ -75,7 +86,7 @@ function addPostPhase() {
         + '<input type="text" id="post_phase_' + currentIndex + '_people_limit" class="post_phase_people_limit" maxlength="20" placeholder="无限制" oninput="" onpropertychange="" onchange="" value="">'
         + '</div>';
     html += '<div class="form_input_phase form_input_phase_operator">'
-        + '<a href="javascript:void(0)" onclick="delPostPhase(\'' + currentDivId + '\')"><i class="fa fa-trash" style="font-size: 16px;" aria-hidden="true"></i></a>'
+        + '<a href="javascript:void(0)" onclick="delPostPhaseWithThis(this)"><i class="fa fa-trash" style="font-size: 16px;" aria-hidden="true"></i></a>'
         + '</div>';
     html += '</div>'
     post_phase_div.append(html);

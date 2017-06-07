@@ -474,7 +474,7 @@
 
                                                     <div class="form_input_phase form_input_phase_operator">
                                                         <a href="javascript:void(0)"
-                                                           onclick="delPostPhase('{{ 'post_phase_item_'.$postPhase->serial_num }}')">
+                                                           onclick="delPostPhaseWithThis(this)">
                                                             <i class="fa fa-trash" style="font-size: 16px;"
                                                                aria-hidden="true"></i>
                                                         </a>
