@@ -18,7 +18,6 @@
     <link rel="apple-touch-icon" sizes="72x72" href="assets/touchicons/apple-touch-icon-72-precomposed"/>
     <link rel="apple-touch-icon" sizes="144x144" href="assets/touchicons/apple-touch-icon-144-precomposed"/>
 
-
     <link rel="stylesheet" href="{{ elixir('assets/css/styles.css') }}">
 
     @yield('head-asset')

@@ -166,6 +166,14 @@ function format_datetime_local($data){
     return date('Y-m-d', strtotime($data)).'T'.date('H:i', strtotime($data));
 }
 
+function format_post_phase_time($data){
+    return date('Y-m-d', strtotime($data)).' '.date('H:i', strtotime($data));
+}
+
 function posts_show_form($post){
 
+}
+
+function get_contact_us_email(){
+    return 'bobohuang.sun@qq.com';
 }

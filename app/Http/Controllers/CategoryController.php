@@ -15,8 +15,15 @@ class CategoryController extends Controller
             $category = Category::findOrFail($id);
             $posts = Post::where('category_id', $id)->with('user', 'category')->recent()->paginate(15);
             return view('categories.show', compact('category', 'posts'));
-        } else{
+        } else if ($id == 0){
             $posts = Post::with('user', 'category')->recent()->paginate(15);
+            $category = new Category();
+            $category->id = 0;
+            return view('categories.show', compact('category', 'posts'));
+        } else if ($id == -1){
+            $posts = Post::recent()->paginate(15);
+            $category = new Category();
+            $category->id = -1;
             return view('categories.show', compact('category', 'posts'));
         }
 

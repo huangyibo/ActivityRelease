@@ -13,11 +13,12 @@ class PagesController extends Controller
 {
     public function home()
     {
-		$posts['news_posts'] = Post::where('category_id', 1)->recent()->limit(3)->get();
-		$posts['tutorials_posts'] = Post::where('category_id', 2)->recent()->limit(3)->get();
-		$posts['packages_posts'] = Post::where('category_id', 3)->recent()->limit(3)->get();
+        $posts['recent_posts'] = Post::recent()->limit(3)->get();
+		$posts['film_club_posts'] = Post::where('category_id', 1)->recent()->limit(3)->get();
+		$posts['others_posts'] = Post::where('category_id', 2)->recent()->limit(3)->get();
+		/*$posts['packages_posts'] = Post::where('category_id', 3)->recent()->limit(3)->get();
 		$posts['resources_posts'] = Post::where('category_id', 4)->recent()->limit(3)->get();
-		$posts['meetup'] = Post::where('category_id', 6)->recent()->limit(3)->get();
+		$posts['meetup'] = Post::where('category_id', 6)->recent()->limit(3)->get();*/
 
         $big_banner = Post::where('position', 'big_banner')->recent()->first();
         $side_banner = Post::where('position', 'side_banner')->recent()->limit(3)->get();

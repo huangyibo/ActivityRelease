@@ -24,20 +24,20 @@
 
     </div>
 @endif
-    @if (count($posts['news_posts']) > 0)
-        @include('_home_cell', ['section_title' => '最新活动', 'posts' => $posts['news_posts'], 'category_id' => 1])
+    @if (count($posts['recent_posts']) > 0)
+        @include('_home_cell', ['section_title' => '最新活动', 'posts' => $posts['recent_posts'], 'category_id' => -1])
     @endif
-    @if (count($posts['tutorials_posts']) > 0)
-        @include('_home_cell', ['section_title' => '线上活动', 'posts' => $posts['tutorials_posts'], 'category_id' => 2])
+    @if (count($posts['film_club_posts']) > 0)
+        @include('_home_cell', ['section_title' => '攝影會', 'posts' => $posts['film_club_posts'], 'category_id' => 1])
     @endif
-    @if (count($posts['packages_posts']) > 0)
-        @include('_home_cell', ['section_title' => '线下活动', 'posts' => $posts['packages_posts'], 'category_id' => 3])
+    @if (count($posts['others_posts']) > 0)
+        @include('_home_cell', ['section_title' => '其他', 'posts' => $posts['others_posts'], 'category_id' => 2])
     @endif
-    @if (count($posts['resources_posts']) > 0)
+    {{--@if (count($posts['resources_posts']) > 0)
         @include('_home_cell', ['section_title' => '讲座推荐', 'posts' => $posts['resources_posts'], 'category_id' => 4, 'extra_class' => 'add-margin-bottom'])
-    @endif
-    @if (count($posts['meetup']) > 0)
+    @endif--}}
+    {{--@if (count($posts['meetup']) > 0)
         @include('_home_cell', ['section_title' => '线下聚会', 'posts' => $posts['meetup'], 'category_id' => 6])
-    @endif
+    @endif--}}
 
 @endsection

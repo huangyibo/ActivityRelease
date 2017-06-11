@@ -56,3 +56,5 @@ Route::resource('post_phases', 'PostPhaseController', ['only' => ['destroy']]);
 
 // Company Main Page: the introduction about company
 Route::get('company/about', 'CompanyController@getCompanyIntroduction');
+Route::post('company/contact-us', 'CompanyController@store');
+Route::get('company/contact-us', 'CompanyController@getContactUs');

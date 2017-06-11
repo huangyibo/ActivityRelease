@@ -22,7 +22,7 @@
     <div class="widget grid-item links">
         <div class="grid-wrap">
             <h4 class="title">友情链接</h4>
-            <a href="http://172.104.67.21" class="btn btn-default btn-block" target="_blank">XX有限公司主页</a>
+            <a href="http://172.104.67.21" class="btn btn-default btn-block" target="_blank">株式会社YAKUMO主页</a>
             {{--<a href="#" class="btn btn-default btn-block" target="_blank"><i class="fa fa-wechat" aria-hidden="true" style="margin-right: 10px"></i>B站点</a>--}}
         </div>
     </div>

@@ -47,7 +47,8 @@ elixir(function(mix) {
         .scripts(basejs.concat([
             'resources/assets/js/main.js',
             'resources/assets/js/post_create_edit.js',
-            'resources/assets/js/post_show_apply.js'
+            'resources/assets/js/post_show_apply.js',
+            'resources/assets/js/ajaxscript.js'
         ]), 'public/assets/js/scripts.js', './')
 
         .version([

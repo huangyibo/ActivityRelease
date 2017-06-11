@@ -35,7 +35,8 @@
                                         <input type="checkbox" name="post_phase" value="{{$postPhase->id}}" />
                                         <span>第{{$postPhase->serial_num}}阶段</span>&nbsp;&nbsp;
                                         <span>报名费用:{{$postPhase->registration_fee}}元 </span>&nbsp;&nbsp;
-                                        <span>时间:{{$postPhase->start_time}}--{{$postPhase->end_time}}</span>
+                                        <span>时间:{{format_post_phase_time($postPhase->start_time)}}
+                                            --{{format_post_phase_time($postPhase->end_time)}}</span>
                                     </div>
                                 @endforeach
                                 </div>
@@ -133,8 +134,8 @@
 
                     <div class="pull-right">
                         @if(isset($applyTemplates) && count($applyTemplates)>0)
-                            <span class='label label-success' style="margin-right: 15px;padding: 8px 5px">已报名 <span
-                                       id="apply_num" style="font-size: 18px">{{ $post->apply_num }}</span>人</span>
+                            {{--<span class='label label-success' style="margin-right: 15px;padding: 8px 5px">已报名 <span
+                                       id="apply_num" style="font-size: 18px">{{ $post->apply_num }}</span>人</span>--}}
 
                             <a href="#" data-toggle="modal" data-target="#apply_join" class="btn btn-primary"
                                style="color:white">我要报名</a>
@@ -165,7 +166,7 @@
                     </div>
 
                     <div class="pull-right share">
-                        <div class="social-share-cs "></div>
+                        <div class="social-share-cs"></div>
                     </div>
 
                 </footer>
@@ -173,7 +174,7 @@
 
             </article>
 
-            @if($post->user)
+            {{--@if($post->user)
                 <div class="about-author clearfix">
                     <a href="{{ route('users.show', $post->user->id) }}">
                         <img src="{{ $post->user->avatar ? $post->user->present()->gravatar(150):'https://dn-phphub.qbox.me/uploads/avatars/1_1479342408.png?imageView2/1/w/200/h/200' }}"
@@ -194,7 +195,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endif--}}
 
             <div class="bg-white recomanded-box">
                 @include('_home_cell', ['section_title' => '近期活动', 'posts' => $posts])
@@ -214,13 +215,13 @@
 
 @section('scripts')
     <script type="text/javascript">
-
+        /*, 'qzone', 'qq', 'douban'*/
         $(document).ready(function () {
             var $config = {
                 title: '{{ $post->title }} from 活动发布平台',
                 wechatQrcodeTitle: "微信扫一扫：分享", // 微信二维码提示文字
                 wechatQrcodeHelper: '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>',
-                sites: ['weibo', 'facebook', 'twitter', 'google', 'qzone', 'qq', 'douban'],
+                sites: ['weibo', 'facebook', 'twitter', 'google'],
             };
 
             socialShare('.social-share-cs', $config);

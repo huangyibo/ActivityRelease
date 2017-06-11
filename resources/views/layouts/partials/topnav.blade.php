@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{ route('home') }}">
-                <span class="main-color text-bold">活动发布</span> 平台</a>
+                <span class="main-color text-bold" style="font-size: 25px;font-family: 幼圆">八雲社</span></a>
         </div>
 
         <div class="navbar-collapse collapse">
@@ -16,9 +16,9 @@
             <!-- Left nav -->
             <ul class="nav navbar-nav" data-smartmenus-id="14739838239025269">
                 <li><a href="{{ route('categories.show', [0]) }}">全部活动</a></li>
-                <li><a href="{{ route('categories.show', [2]) }}">线上活动</a></li>
-                <li><a href="{{ route('categories.show', [3]) }}">线下活动</a></li>
-
+                <li><a href="{{ route('categories.show', [1]) }}">攝影會</a></li>
+                <li><a href="{{ route('categories.show', [2]) }}">其他</a></li>
+                <li><a href="{{ url('company/contact-us') }}">お問い合わせ</a></li>
             </ul>
 
             <!-- Right nav -->
