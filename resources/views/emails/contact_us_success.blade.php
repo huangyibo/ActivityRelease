@@ -62,6 +62,7 @@
                     <tr>
                         <th>名字</th>
                         <th>公司名称</th>
+                        <th>邮箱地址</th>
                         <th>电话号码</th>
                         <th>联系范畴</th>
                         <th style="width: 30%;">询问内容</th>
@@ -75,6 +76,9 @@
                             <td
                                 title="{{ $contactInfo->company_name }}">
                                 {{ $contactInfo->company_name }}
+                            </td>
+                            <td title="{{ $contactInfo->email }}">
+                                {{ $contactInfo->email }}
                             </td>
                             <td title="{{ $contactInfo->phone }}">
                                 {{ $contactInfo->phone }}
