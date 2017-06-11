@@ -95,7 +95,7 @@ $(document).ready(function () {
                        /*$('#contact-us-alert-success').removeClass('hidden');
                        $('#contact-us-alert-success').text('Send Successfully!');*/
                        clearContactForm();
-                       swal("报名成功!", "报名信息已经发送到您的邮箱，请查收!", "success");
+                       swal("提交成功!", "您的咨询信息已经成功发送到公司客服!", "success");
                    }else {
                        setErrorAlert("Submit Failed!");
                        swal("发送失败!", "您所在的网络不稳定，请稍后重发!", "error");
