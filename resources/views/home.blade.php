@@ -25,13 +25,13 @@
     </div>
 @endif
     @if (count($posts['recent_posts']) > 0)
-        @include('_home_cell', ['section_title' => '最新活动', 'posts' => $posts['recent_posts'], 'category_id' => -1])
+        @include('_home_cell', ['section_title' => 'おすすめ', 'posts' => $posts['recent_posts'], 'category_id' => -1])
     @endif
     @if (count($posts['film_club_posts']) > 0)
-        @include('_home_cell', ['section_title' => '攝影會', 'posts' => $posts['film_club_posts'], 'category_id' => 1])
+        @include('_home_cell', ['section_title' => '撮影会', 'posts' => $posts['film_club_posts'], 'category_id' => 1])
     @endif
     @if (count($posts['others_posts']) > 0)
-        @include('_home_cell', ['section_title' => '其他', 'posts' => $posts['others_posts'], 'category_id' => 2])
+        @include('_home_cell', ['section_title' => 'その他', 'posts' => $posts['others_posts'], 'category_id' => 2])
     @endif
     {{--@if (count($posts['resources_posts']) > 0)
         @include('_home_cell', ['section_title' => '讲座推荐', 'posts' => $posts['resources_posts'], 'category_id' => 4, 'extra_class' => 'add-margin-bottom'])

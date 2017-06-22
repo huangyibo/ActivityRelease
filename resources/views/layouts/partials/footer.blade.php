@@ -17,7 +17,7 @@
                         <a href="#" style="color:#a5a5a5">
                             {{--<img class="brand-icon" src="" >--}}
                             <span style="display: inline-block;">
-                                Copyright &copy;2017 八雲社活动发布系统. | Code licensed under MIT.
+                                Copyright &copy;2017 八雲社 | Code licensed under MIT.
                             </span>
                         </a>
                     </p>

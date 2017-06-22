@@ -15,9 +15,9 @@
 
             <!-- Left nav -->
             <ul class="nav navbar-nav" data-smartmenus-id="14739838239025269">
-                <li><a href="{{ route('categories.show', [0]) }}">全部活动</a></li>
-                <li><a href="{{ route('categories.show', [1]) }}">攝影會</a></li>
-                <li><a href="{{ route('categories.show', [2]) }}">其他</a></li>
+                <li><a href="{{ route('categories.show', [0]) }}">すべで</a></li>
+                <li><a href="{{ route('categories.show', [1]) }}">撮影会</a></li>
+                <li><a href="{{ route('categories.show', [2]) }}">その他</a></li>
                 <li><a href="{{ url('company/contact-us') }}">お問い合わせ</a></li>
             </ul>
 

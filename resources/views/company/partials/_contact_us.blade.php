@@ -31,7 +31,7 @@
                         <input class="form-control" name="company_name" type="text" id="company_name" placeholder="貴社名">
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3 help-block">
-                        如：阿里巴巴
+                        例：株式会社YAKUMO
                     </div>
                 </div>
 

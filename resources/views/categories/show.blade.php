@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 
-@section('title', (isset($category) && $category->id>0) ? $category->name : ((isset($category) && $category->id==0) ? '全部活動':'最新活動'). ' | ')
+@section('title', (isset($category) && $category->id>0) ? $category->name : ((isset($category) && $category->id==0) ? 'すべて':'おすすめ'). ' | ')
 
 @section('content')
 
@@ -9,7 +9,7 @@
 
         <div class="col-md-12">
             <div class="category-header">
-                <h2 class=" font3"><i class="fa fa-folder-open-o"></i> {{ (isset($category) && $category->id>0) ? $category->name : ((isset($category) && $category->id==0) ? '全部活動':'最新活動') }}
+                <h2 class=" font3"><i class="fa fa-folder-open-o"></i> {{ (isset($category) && $category->id>0) ? $category->name : ((isset($category) && $category->id==0) ? 'すべて':'おすすめ') }}
                 </h2>
             </div>
         </div>

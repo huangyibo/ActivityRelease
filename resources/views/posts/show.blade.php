@@ -10,7 +10,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel">活动报名</h4>
+                        <h4 class="modal-title" id="exampleModalLabel">申し込み</h4>
                     </div>
                     <form method="POST" action="{{ route('applicants.store') }}" accept-charset="UTF-8"
                           id="applicants-create-form">
@@ -26,16 +26,16 @@
                                 <div class="form-group">
                                     <label class="control-label">
                                         <span style="color: red;">*</span>
-                                        选择活动阶段:
+                                        ご参加ご希望の部:
                                     </label>
                                 </div>
                                 <div id="post_phase_options" style="margin-top: 30px;padding-left:30px; padding-right:20px;">
                                 @foreach($postPhases as $postPhase)
                                     <div class="checkbox">
                                         <input type="checkbox" name="post_phase" value="{{$postPhase->id}}" />
-                                        <span>第{{$postPhase->serial_num}}阶段</span>&nbsp;&nbsp;
-                                        <span>报名费用:{{$postPhase->registration_fee}}元 </span>&nbsp;&nbsp;
-                                        <span>时间:{{format_post_phase_time($postPhase->start_time)}}
+                                        <span>phase{{$postPhase->serial_num}}</span>&nbsp;&nbsp;
+                                        <span>参加料:{{$postPhase->registration_fee}}　</span>&nbsp;&nbsp;
+                                        <span>時間:{{format_post_phase_time($postPhase->start_time)}}
                                             --{{format_post_phase_time($postPhase->end_time)}}</span>
                                     </div>
                                 @endforeach
@@ -43,7 +43,7 @@
                             @endif
                             <div id="help_block_post_phase" class="help-block hidden">
                                 <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                <span>请选择活动阶段</span>
+                                <span>選択してください</span>
                             </div>
 
                             <div id="apply_attr_info">
@@ -62,44 +62,44 @@
                                             {{ $applyTemplate->is_required ? 'required' : ''}}>
                                     <div id="help_block_{{ $applyTemplate->apply_attr->attr_name }}" class="help-block hidden">
                                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                        <span>{{ $applyTemplate->apply_attr->attr_slug }}不能为空</span>
+                                        <span>{{ $applyTemplate->apply_attr->attr_slug }}は必要項目です</span>
                                     </div>
                                 </div>
                             @endforeach
                             </div>
                             {{--<div class="form-group">
                                 <label for="recipient-name" class="control-label"><span
-                                            style="color: red;">*</span>姓名:</label>
+                                            style="color: red;">*</span>お振込名義:</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="输入姓名" required>
                             </div>
                             <div class="form-group">
                                 <label for="message-text" class="control-label"><span
-                                            style="color: red;">*</span>手机号:</label>
+                                            style="color: red;">*</span>携帯電話番号:</label>
                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="手机号码" required>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="control-label"><span
-                                            style="color: red;">*</span>邮箱:</label>
+                                            style="color: red;">*</span>メールアドレス:</label>
                                 <input type="text" class="form-control" id="email" name="email" placeholder="常用邮箱" required>
                             </div>
                             <div class="form-group">
-                                <label for="recipient-name" class="control-label">&nbsp;单位:</label>
+                                <label for="recipient-name" class="control-label">&nbsp;所属:</label>
                                 <input type="text" class="form-control" id="company_name" name="company_name">
                             </div>
                             <div class="form-group">
-                                <label for="recipient-name" class="control-label">&nbsp;职位:</label>
+                                <label for="recipient-name" class="control-label">&nbsp;ハンドルネーム:</label>
                                 <input type="text" class="form-control" id="position" name="position">
                             </div>
                             <div class="form-group">
-                                <label for="message-text" class="control-label">&nbsp;备注:</label>
+                                <label for="message-text" class="control-label">&nbsp;備考:</label>
                                 <textarea class="form-control" id="message-text" name="message_text" rows="3"
                                           placeholder="其它事项请在此备注"></textarea>
                             </div>--}}
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <button id="btn_apply_post_submit" type="button" class="btn btn-primary">提交
+                            <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                            <button id="btn_apply_post_submit" type="button" class="btn btn-primary">確定
                             </button>
                         </div>
                     </form>
@@ -113,7 +113,7 @@
         {{--margin-left: 4.16666666%;--}}
         @if(isset($apply_status))
             <div class="alert alert-success" role="alert">
-                活动报名信息已经发送到您的邮箱，请查收！
+                お手続きが完了いたしますた！ありがとうございました！
             </div>
         @endif
         <main class="col-md-9 main-content">
@@ -138,7 +138,7 @@
                                        id="apply_num" style="font-size: 18px">{{ $post->apply_num }}</span>人</span>--}}
 
                             <a href="#" data-toggle="modal" data-target="#apply_join" class="btn btn-primary"
-                               style="color:white">我要报名</a>
+                               style="color:white">申し込み</a>
                         @endif
 
                     </div>
