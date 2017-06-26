@@ -1,7 +1,6 @@
 @extends('layouts.default')
 
-
-@section('title', (isset($category) && $category->id>0) ? $category->name : ((isset($category) && $category->id==0) ? 'すべて':'おすすめ'). ' | ')
+@section('title', (isset($category) && $category->id>0) ? $category->name.' | '  : ((isset($category) && $category->id==0) ? 'すべて':'おすすめ'). ' | ')
 
 @section('content')
 

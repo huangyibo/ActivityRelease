@@ -41,9 +41,9 @@
         .post_phase {
             background-color: #fcfcfc;
             position: relative;
-            width: 910px;
-            min-width: 910px;
-            overflow-x: auto;
+            width: 1106px;
+            min-width: 1106px;
+            /*overflow-x: auto;*/
         }
 
         .post_phase .post_phase_item_head {
@@ -69,7 +69,7 @@
         }
 
         .post_phase .post_phase_item_head span.title02 {
-            width: 100px;
+            width: 196px;
         }
 
         .post_phase .post_phase_item_head span.title03 {
@@ -104,13 +104,13 @@
 
         .post_phase #post_phase_list .post_phase_item .form_input_phase_name {
             height: 38px;
-            width: 100px;
+            width: 196px;
             float: left;
         }
 
         .post_phase #post_phase_list .post_phase_item .form_input_phase_name input {
             height: 38px;
-            width: 80px;
+            width: 190px;
             border: 1px solid #d9d9d9;
             text-align: center;
             font-size: 14px;
@@ -416,7 +416,7 @@
                                 <div id="post_phase" class="post_phase">
                                     <div class="post_phase_item_head">
                                         <span class="title01">序号</span>
-                                        {{--<span class="title02">阶段名称</span>--}}
+                                        <span class="title02">阶段名称</span>
                                         <span class="title03">时间</span>
                                         <span class="title04">报名费用</span>
                                         <span class="title04">名额限制</span>
@@ -432,11 +432,10 @@
 
                                                     <div class="form_input_phase form_input_serial_num">{{ $postPhase->serial_num }}</div>
 
-                                                    {{--<div class="form_input_phase form_input_phase_name">
+                                                    <div class="form_input_phase form_input_phase_name">
                                                         <input type="text" id="post_phase_1_name" class="post_phase_name"
-                                                               maxlength="20" placeholder="输入阶段名称" oninput="" onpropertychange=""
-                                                               onchange="" value="第一阶段">
-                                                    </div>--}}
+                                                               maxlength="20" placeholder="输入阶段名称" value="{{ $postPhase->phase_name }}">
+                                                    </div>
 
                                                     <div class="form_input_phase form_input_phase_time">
                                                         <input type="datetime-local"

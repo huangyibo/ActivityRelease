@@ -41,7 +41,7 @@ elixir(function(mix) {
         .sass([
             'base.scss',
             'main.scss',
-            'post_create_edit.scss'
+            // 'post_create_edit.scss'
         ], 'public/assets/css/styles.css')
 
         .scripts(basejs.concat([
