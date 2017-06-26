@@ -2,6 +2,14 @@
 
 @section('title', $post->title . ' | ')
 
+@section('head-asset')
+    <style type="text/css">
+        .control-label {
+            width: 100%;
+        }
+    </style>
+@stop
+
 @section('content')
     @if(isset($applyTemplates) && count($applyTemplates)>0)
         <div class="modal fade" id="apply_join" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -15,86 +23,67 @@
                     <form method="POST" action="{{ route('applicants.store') }}" accept-charset="UTF-8"
                           id="applicants-create-form">
                         <div class="modal-body">
-                           {{-- @include('error')--}}
-                            <div id="apply-post-alert-danger" class="alert alert-danger alert-dismissible hidden" style="height: 40px;padding-left: 20px" role="alert">
+                            {{-- @include('error')--}}
+                            <div id="apply-post-alert-danger" class="alert alert-danger alert-dismissible hidden"
+                                 style="height: 40px;padding-left: 20px" role="alert">
                             </div>
 
                             {!! csrf_field() !!}
                             <input id="post_id" type="hidden" name="post_id" value="{{ $post->id }}">
 
+
                             @if(isset($postPhases) && count($postPhases)>0)
                                 <div class="form-group">
-                                    <label class="control-label">
+                                    <label class="control-label" style="width: 100%;">
                                         <span style="color: red;">*</span>
                                         ご参加ご希望の部:
                                     </label>
-                                </div>
-                                <div id="post_phase_options" style="margin-top: 30px;padding-left:30px; padding-right:20px;">
-                                @foreach($postPhases as $postPhase)
-                                    <div class="checkbox">
-                                        <input type="checkbox" name="post_phase" value="{{$postPhase->id}}" />
-                                        <span>phase{{$postPhase->serial_num}}</span>&nbsp;&nbsp;
-                                        <span>参加料:{{$postPhase->registration_fee}}　</span>&nbsp;&nbsp;
-                                        <span>時間:{{format_post_phase_time($postPhase->start_time)}}
-                                            --{{format_post_phase_time($postPhase->end_time)}}</span>
+
+                                    <div id="post_phase_options"
+                                         style="padding-left:30px; padding-right:20px;width: 100%;">
+                                        @foreach($postPhases as $postPhase)
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="post_phase"
+                                                       value="{{$postPhase->id}}"/>
+                                                <span>phase{{$postPhase->serial_num}}</span>&nbsp;&nbsp;
+                                                <span>参加料:{{$postPhase->registration_fee}}　</span>&nbsp;&nbsp;
+                                                <span>時間:{{format_post_phase_time($postPhase->start_time)}}
+                                                    --{{format_post_phase_time($postPhase->end_time)}}</span>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
                                 </div>
                             @endif
+
                             <div id="help_block_post_phase" class="help-block hidden">
                                 <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                                 <span>選択してください</span>
                             </div>
 
                             <div id="apply_attr_info">
-                            @foreach($applyTemplates as $applyTemplate)
-                                <div id="form_group_{{ $applyTemplate->apply_attr->attr_name }}" class="form-group">
-                                    <label for="{{ $applyTemplate->apply_attr_id }}" class="control-label">
-                                        @if($applyTemplate->is_required)
-                                            <span class="required_item" style="color: red;">*</span>
-                                        @endif
-                                        {{ $applyTemplate->apply_attr->attr_slug }}:
-                                    </label>
-                                    <input type="{{ is_null($applyTemplate->apply_attr->attr_type)? 'text': $applyTemplate->apply_attr->apply_type }}"
-                                           class="form-control" id="{{ $applyTemplate->apply_attr_id }}"
-                                           name="{{ $applyTemplate->apply_attr->attr_name }}"
-                                           placeholder="{{ $applyTemplate->apply_attr->attr_slug }}"
-                                            {{ $applyTemplate->is_required ? 'required' : ''}}>
-                                    <div id="help_block_{{ $applyTemplate->apply_attr->attr_name }}" class="help-block hidden">
-                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                        <span>{{ $applyTemplate->apply_attr->attr_slug }}は必須項目です</span>
+                                @foreach($applyTemplates as $applyTemplate)
+                                    <div id="form_group_{{ $applyTemplate->apply_attr->attr_name }}"
+                                         class="form-group">
+                                        <label for="{{ $applyTemplate->apply_attr_id }}"
+                                               class="control-label">
+                                            @if($applyTemplate->is_required)
+                                                <span class="required_item" style="color: red;">*</span>
+                                            @endif
+                                            {{ $applyTemplate->apply_attr->attr_slug }}:
+                                        </label>
+                                        <input type="{{ is_null($applyTemplate->apply_attr->attr_type)? 'text': $applyTemplate->apply_attr->apply_type }}"
+                                               class="form-control" id="{{ $applyTemplate->apply_attr_id }}"
+                                               name="{{ $applyTemplate->apply_attr->attr_name }}"
+                                               placeholder="{{ $applyTemplate->apply_attr->attr_slug }}"
+                                                {{ $applyTemplate->is_required ? 'required' : ''}}>
+                                        <div id="help_block_{{ $applyTemplate->apply_attr->attr_name }}"
+                                             class="help-block hidden">
+                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                            <span>{{ $applyTemplate->apply_attr->attr_slug }}は必要項目です</span>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
                             </div>
-                            {{--<div class="form-group">
-                                <label for="recipient-name" class="control-label"><span
-                                            style="color: red;">*</span>お振込名義:</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="输入姓名" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="control-label"><span
-                                            style="color: red;">*</span>携帯電話番号:</label>
-                                <input type="text" class="form-control" id="phone" name="phone" placeholder="手机号码" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="control-label"><span
-                                            style="color: red;">*</span>メールアドレス:</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="常用邮箱" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="control-label">&nbsp;所属:</label>
-                                <input type="text" class="form-control" id="company_name" name="company_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="control-label">&nbsp;ハンドルネーム:</label>
-                                <input type="text" class="form-control" id="position" name="position">
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="control-label">&nbsp;備考:</label>
-                                <textarea class="form-control" id="message-text" name="message_text" rows="3"
-                                          placeholder="其它事项请在此备注"></textarea>
-                            </div>--}}
 
                         </div>
                         <div class="modal-footer">
@@ -156,11 +145,13 @@
                                     class="fa fa-folder-open-o"></i> {{ $post->category->name }}</a>
 
                         @if (Auth::check() && (Auth::user()->can('visit_admin') || Auth::user()->id === $post->user_id))
-                            | <a href="{{ route('posts.edit', [$post->id]) }}"><i class="fa fa-edit"></i> 修改活动</a>
+                            | <a href="{{ route('posts.edit', [$post->id]) }}"><i class="fa fa-edit"></i>
+                                修改活动</a>
                         @endif
 
                         @if (Auth::check() && Auth::user()->can('visit_admin'))
-                            | <a href="/admin/posts/{{ $post->id }}" target="_blank"><i class="fa fa-eye"></i> 后台查看</a>
+                            | <a href="/admin/posts/{{ $post->id }}" target="_blank"><i class="fa fa-eye"></i>
+                                后台查看</a>
                         @endif
 
                     </div>

@@ -72,23 +72,21 @@ function addPostPhase() {
     var currentIndex = sumOfItems + 1;
     var currentDivId = "post_phase_item_" + currentIndex;
 
-    var html = ' <div class="post_phase_item" id="post_phase_item_' + currentIndex + '" busid mrmfx="mrmfx">';
-    html += '<div class="form_input_phase form_input_serial_num">' + currentIndex + '</div>';
-    html += '<div class="form_input_phase form_input_phase_time">'
-        + '<input type="datetime-local" id="post_phase_' + currentIndex + '_start_time" class="post_phase_time" placeholder="阶段起始时间" value="">'
-        + ' <i class="fa fa-minus" style="color: #666;font-size: 14px"></i> '
-        + '<input type="datetime-local" id="post_phase_' + currentIndex + '_end_time" class="post_phase_time" placeholder="阶段结束时间" value="">'
-        + '</div>';
-    html += '<div class="form_input_phase form_input_phase_fee">'
-        + '<input type="text" id="post_phase_' + currentIndex + '_fee" class="post_phase_fee" maxlength="7" placeholder="免费请填0" oninput="" onpropertychange="" onchange="" value="0">'
-        + '</div>';
-    html += '<div class="form_input_phase form_input_phase_people_limit">'
-        + '<input type="text" id="post_phase_' + currentIndex + '_people_limit" class="post_phase_people_limit" maxlength="20" placeholder="无限制" oninput="" onpropertychange="" onchange="" value="">'
-        + '</div>';
-    html += '<div class="form_input_phase form_input_phase_operator">'
-        + '<a href="javascript:void(0)" onclick="delPostPhaseWithThis(this)"><i class="fa fa-trash" style="font-size: 16px;" aria-hidden="true"></i></a>'
-        + '</div>';
-    html += '</div>'
+    var html = '<div class="post_phase_item" id="post_phase_item_'+ currentIndex +'">';
+    html += '<div class="form_input_phase form_input_serial_num">'+ currentIndex +'</div>';
+    html += '<div class="form_input_phase form_input_phase_name"><input type="text" id="post_phase_1_name" class="post_phase_name" maxlength="20" placeholder="输入阶段名称" value=""></div>';
+    html += '<div class="form_input_phase form_input_phase_time">' +
+        '<input type="datetime-local" id="post_phase_'+ currentIndex + '_start_time" class="post_phase_time" placeholder="阶段起始时间" value="">'
+        + '<i class="fa fa-minus" style="color: #666;font-size: 14px"></i>' +
+        '<input type="datetime-local" id="post_phase_'+ currentIndex +'_end_time" class="post_phase_time" placeholder="阶段结束时间" value=""></div>';
+    html += '<div class="form_input_phase form_input_phase_fee"><input type="text" id="post_phase_'+ currentIndex +'_fee" class="post_phase_fee" maxlength="7" placeholder="免费请填0" value="0"></div>';
+    html += '<div class="form_input_phase form_input_phase_people_limit">' +
+        '<input type="text" id="post_phase_'+ currentIndex
+        +'_people_limit" class="post_phase_people_limit" maxlength="20" placeholder="不填则无限制"'
+        + ' value="0"></div>';
+    html += '<div class="form_input_phase form_input_phase_operator"><a href="javascript:void(0)"'
+        +' onclick="delPostPhaseWithThis(this)"><i class="fa fa-trash" style="font-size: 16px;" aria-hidden="true"></i></a></div>';
+    html += '</div>';
     post_phase_div.append(html);
 }
 
@@ -277,6 +275,10 @@ function getPostPhases() {
         var serial_num_div = postPhaseItems[i].getElementsByClassName('form_input_serial_num')[0];
         var serial_num = text(serial_num_div);
         console.log('serial_num:' + serial_num);
+        var phase_name_div = postPhaseItems[i].getElementsByClassName('form_input_phase_name')[0];
+        var phase_name_input = phase_name_div.getElementsByTagName('input')[0];
+        var phase_name = phase_name_input.value;
+
         var postPhaseTimeDiv = postPhaseItems[i].getElementsByClassName('form_input_phase_time')[0];
         var postPhaseTimeInputs = postPhaseTimeDiv.getElementsByTagName('input');
         var startTime = postPhaseTimeInputs[0].value;
@@ -289,7 +291,7 @@ function getPostPhases() {
         phaseLimit = isEmpty(phaseLimit) ? 0 : phaseLimit;
 
         postPhase['serial_num'] = isEmpty(serial_num) ? i + 1 : serial_num;
-        postPhase['phase_name'] = '第' + serial_num + '阶段';
+        postPhase['phase_name'] = phase_name;
         postPhase['registration_fee'] = phaseFee;
         postPhase['register_limit'] = phaseLimit;
         postPhase['start_time'] = startTime;
