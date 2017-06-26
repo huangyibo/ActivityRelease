@@ -62,7 +62,7 @@
                                             {{ $applyTemplate->is_required ? 'required' : ''}}>
                                     <div id="help_block_{{ $applyTemplate->apply_attr->attr_name }}" class="help-block hidden">
                                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                        <span>{{ $applyTemplate->apply_attr->attr_slug }}は必要項目です</span>
+                                        <span>{{ $applyTemplate->apply_attr->attr_slug }}は必須項目です</span>
                                     </div>
                                 </div>
                             @endforeach
@@ -198,7 +198,7 @@
             @endif--}}
 
             <div class="bg-white recomanded-box">
-                @include('_home_cell', ['section_title' => '近期活动', 'posts' => $posts])
+                @include('_home_cell', ['section_title' => 'おすすめ', 'posts' => $posts])
             </div>
 
 
