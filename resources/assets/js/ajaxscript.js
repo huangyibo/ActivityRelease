@@ -50,12 +50,12 @@ function closeAlert(){
     $('#contact-us-alert-success').addClass('hidden');
 }
 
-/*function isEmpty(str){
+function isEmpty(str){
     if(str === null || str === '' || str === undefined){
         return true;
     }
     return false;
-}*/
+}
 
 function setErrorAlert(str){
     $('#contact-us-alert-danger').removeClass('hidden');
