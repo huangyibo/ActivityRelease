@@ -1,40 +1,3 @@
-/**
- * 弹出式提示框，默认1.2秒自动消失
- * @param message 提示信息
- * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
- * @param time 消失时间
- */
-var prompt = function (message, style, time) {
-    style = (style === undefined) ? 'alert-success' : style;
-    time = (time === undefined) ? 1200 : time;
-    $('<div>')
-        .appendTo('body')
-        .addClass('alert ' + style)
-        .html(message)
-        .show()
-        .delay(time)
-        .fadeOut();
-};
-
-// 成功提示
-var success_prompt = function (message, time) {
-    prompt(message, 'alert-success', time);
-};
-
-// 失败提示
-var fail_prompt = function (message, time) {
-    prompt(message, 'alert-danger', time);
-};
-
-// 提醒
-var warning_prompt = function (message, time) {
-    prompt(message, 'alert-warning', time);
-};
-
-// 信息提示
-var info_prompt = function (message, time) {
-    prompt(message, 'alert-info', time);
-};
 
 function isEmpty(str) {
     if (str === null || str === '' || str === undefined) {
@@ -65,39 +28,6 @@ function text(e)
 
 (function () {
 
-    /*var window_width = $(window).width();
-     var window_height = $(window).height();
-     $('body').css({
-     "width":window_width,
-     "height":window_height,
-     "overflow":"scroll"
-     });
-
-     Resize = function () {
-     window_width = $(window).width();
-     if(window_width<=1000){
-     $("body").css({
-     "overflow":"auto"
-     });
-     }
-
-     }*/
-    iziToast.settings({
-        timeout: 10000,
-        resetOnHover: true,
-        icon: 'material-icons',
-        transitionIn: 'flipInX',
-        transitionOut: 'flipOutX',
-        position: 'center',
-        onOpen: function(){
-            console.log('callback abriu!');
-        },
-        onClose: function(){
-            console.log("callback fechou!");
-        }
-    });
-
-
     /* 吸顶条Javascript代码片段 */
     function scrollside() {
         var scrollHeight = $(window).scrollTop();
@@ -120,7 +50,7 @@ function text(e)
         $navbar.removeClass("nav_scroll");
     }
 
-    function promptRegister() {
+    /*function promptRegister() {
         swal({
                 title: "订阅 Laravel 资讯",
                 text: "请前往「Laravel China 社区」注册账号，即可自动订阅「Laravel 资讯」。",
@@ -141,16 +71,16 @@ function text(e)
                     document.body.style.overflow = "scroll";
                 }
             });
-    }
+    }*/
 
     // 订阅按钮点击
-    $('#subscrib-btn').click(function () {
+    /*$('#subscrib-btn').click(function () {
         promptRegister();
     });
 
     $('#subscribe-input').focus(function () {
         promptRegister();
-    });
+    });*/
 
 
 

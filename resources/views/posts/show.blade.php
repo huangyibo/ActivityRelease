@@ -16,12 +16,12 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                         <h4 class="modal-title" id="exampleModalLabel">申し込み</h4>
                     </div>
-                    <form method="POST" action="{{ route('applicants.store') }}" accept-charset="UTF-8"
-                          id="applicants-create-form">
+                    <form method="POST" action="{{ route('applicants.store') }}" accept-charset="UTF-8" id="applicants-create-form">
                         <div class="modal-body">
                             {{-- @include('error')--}}
                             <div id="apply-post-alert-danger" class="alert alert-danger alert-dismissible hidden"
@@ -39,13 +39,12 @@
                                         ご参加ご希望の部:
                                     </label>
 
-                                    <div id="post_phase_options"
-                                         style="padding-left:30px; padding-right:20px;width: 100%;">
+                                    <div id="post_phase_options" style="padding-left:30px; padding-right:20px;width: 100%;">
                                         @foreach($postPhases as $postPhase)
                                             <div class="checkbox">
                                                 <input type="checkbox" name="post_phase"
                                                        value="{{$postPhase->id}}"/>
-                                                <span>phase{{$postPhase->serial_num}}</span>&nbsp;&nbsp;
+                                                <span>{{$postPhase->phase_name}}</span>&nbsp;&nbsp;
                                                 <span>参加料:{{$postPhase->registration_fee}}　</span>&nbsp;&nbsp;
                                                 <span>時間:{{format_post_phase_time($postPhase->start_time)}}
                                                     --{{format_post_phase_time($postPhase->end_time)}}</span>
@@ -62,10 +61,8 @@
 
                             <div id="apply_attr_info">
                                 @foreach($applyTemplates as $applyTemplate)
-                                    <div id="form_group_{{ $applyTemplate->apply_attr->attr_name }}"
-                                         class="form-group">
-                                        <label for="{{ $applyTemplate->apply_attr_id }}"
-                                               class="control-label">
+                                    <div id="form_group_{{ $applyTemplate->apply_attr->attr_name }}" class="form-group">
+                                        <label for="{{ $applyTemplate->apply_attr_id }}" class="control-label">
                                             @if($applyTemplate->is_required)
                                                 <span class="required_item" style="color: red;">*</span>
                                             @endif
@@ -76,8 +73,7 @@
                                                name="{{ $applyTemplate->apply_attr->attr_name }}"
                                                placeholder="{{ $applyTemplate->apply_attr->attr_slug }}"
                                                 {{ $applyTemplate->is_required ? 'required' : ''}}>
-                                        <div id="help_block_{{ $applyTemplate->apply_attr->attr_name }}"
-                                             class="help-block hidden">
+                                        <div id="help_block_{{ $applyTemplate->apply_attr->attr_name }}" class="help-block hidden">
                                             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                                             <span>{{ $applyTemplate->apply_attr->attr_slug }}は必要項目です</span>
                                         </div>
@@ -106,13 +102,6 @@
     @endif
 
     <div class="row colom-container">
-
-        {{--margin-left: 4.16666666%;--}}
-        @if(isset($apply_status))
-            <div class="alert alert-success" role="alert">
-                お手続きが完了いたしますた！ありがとうございました！
-            </div>
-        @endif
         <main class="col-md-9 main-content">
 
             <article id="70" class="post">
@@ -124,8 +113,8 @@
                 <header class="post-head">
                     <h1 class="post-title">{{ $post->title }}</h1>
                     <section class="post-meta">
-                        <time class="post-date" title="{{ $post->created_at }}"><i class="fa fa-clock-o"
-                                                                                   aria-hidden="true"></i> {{ $post->created_at }}
+                        <time class="post-date" title="{{ $post->created_at }}">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> {{ $post->created_at }}
                         </time>
                     </section>
 
@@ -149,17 +138,20 @@
 
                 <footer class="post-footer clearfix">
                     <div class="pull-left tag-list">
-                        <a href="{{ route('categories.show', [$post->category->id]) }}"><i
-                                    class="fa fa-folder-open-o"></i> {{ $post->category->name }}</a>
+                        <a href="{{ route('categories.show', [$post->category->id]) }}">
+                            <i class="fa fa-folder-open-o"></i> {{ $post->category->name }}
+                        </a>
 
                         @if (Auth::check() && (Auth::user()->can('visit_admin') || Auth::user()->id === $post->user_id))
-                            | <a href="{{ route('posts.edit', [$post->id]) }}"><i class="fa fa-edit"></i>
-                                修改活动</a>
+                            | <a href="{{ route('posts.edit', [$post->id]) }}">修改活动
+                                <i class="fa fa-edit"></i>
+                            </a>
                         @endif
 
                         @if (Auth::check() && Auth::user()->can('visit_admin'))
-                            | <a href="/admin/posts/{{ $post->id }}" target="_blank"><i class="fa fa-eye"></i>
-                                后台查看</a>
+                            | <a href="/admin/posts/{{ $post->id }}" target="_blank">
+                                <i class="fa fa-eye"></i>后台查看
+                            </a>
                         @endif
 
                     </div>
@@ -197,7 +189,7 @@
             @endif--}}
 
             <div class="bg-white recomanded-box">
-                @include('_home_cell', ['section_title' => '近期活动', 'posts' => $posts])
+                @include('_home_cell', ['section_title' => '今後のイベント', 'posts' => $posts])
             </div>
 
 

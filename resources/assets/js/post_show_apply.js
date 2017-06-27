@@ -173,6 +173,7 @@ $(document).ready(function () {
                 if (name == 'email' && !isEmail(value)) {
                     $('#form_group_' + name).removeClass('has-success').addClass('has-error');
                     $('#help_block_' + name + '_format_check').removeClass('hidden');
+                    $('#help_block_' + name).addClass('hidden');
                 } else {
                     $('#help_block_' + name + '_format_check').addClass('hidden');
                     $('#form_group_' + name).removeClass('has-error').addClass('has-success');
