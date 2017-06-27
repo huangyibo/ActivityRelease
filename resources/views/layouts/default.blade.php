@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>@yield('title')八雲社</title>
@@ -25,7 +24,7 @@
 </head>
 {{--onLoad="Resize()" onResize="Resize()"--}}
 <body class="{{ route_class() }}-page">
-<div class="alert"></div>
+
 @include('layouts.partials.topnav')
 
 <section class="mastwrap">

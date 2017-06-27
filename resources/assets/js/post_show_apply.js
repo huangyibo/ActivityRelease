@@ -9,6 +9,18 @@
  * (3) 活动提交
  *
  */
+function isEmail(email_address) {
+    var regex = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+    if (regex.test(email_address)) {
+        var user_name = email_address.replace(regex, "$1");
+        var domain_name = email_address.replace(regex, "$2");
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function isEmpty(str) {
     if (str === null || str === '' || str === undefined) {
         return true;
@@ -18,7 +30,7 @@ function isEmpty(str) {
 
 function getApplicants() {
     var result = true;
-    
+
 }
 
 function getPostId() {
@@ -28,7 +40,7 @@ function getPostId() {
 function getSelectedPostPhases() {
     var postPhases = [];
     $("input[name='post_phase']:checkbox").each(function () {
-        if (this.checked){
+        if (this.checked) {
             var postPhase = {};
             postPhase['id'] = $(this).val();
             postPhases.push(postPhase);
@@ -50,23 +62,30 @@ function getApplyAttrs() {
         applyAttr['name'] = $(this).attr('name');
         applyAttr['value'] = $.trim($(this).val());
         applyAttr['is_required'] = !isEmpty($(this).attr('required'));
-        if(applyAttr['is_required'] == true && isEmpty(applyAttr['value'])){
+        if (applyAttr['is_required'] == true && isEmpty(applyAttr['value'])) {
             result = false;
-            $('#form_group_'+applyAttr['name']).removeClass('has-success').addClass('has-error');
-            $('#help_block_'+applyAttr['name']).removeClass('hidden');
-        }else {
-            $('#form_group_'+applyAttr['name']).removeClass('has-error').addClass('has-success');
-            $('#help_block_'+applyAttr['name']).addClass('hidden');
+            $('#form_group_' + applyAttr['name']).removeClass('has-success').addClass('has-error');
+            $('#help_block_' + applyAttr['name']).removeClass('hidden');
+        } else {
+            if (applyAttr['name'] == 'email' && !isEmail(applyAttr['value'])) {
+                result = false;
+                $('#form_group_' + applyAttr['name']).removeClass('has-success').addClass('has-error');
+                $('#help_block_' + applyAttr['name'] + '_format_check').removeClass('hidden');
+            } else {
+                $('#help_block_' + applyAttr['name'] + '_format_check').addClass('hidden');
+                $('#form_group_' + applyAttr['name']).removeClass('has-error').addClass('has-success');
+                $('#help_block_' + applyAttr['name']).addClass('hidden');
+            }
         }
         applyAttrs.push(applyAttr);
     });
-    if(!result){
+    if (!result) {
         return false;
     }
     return applyAttrs;
 }
 
-function getApplicantFormData(postPhases,applyAttrs) {
+function getApplicantFormData(postPhases, applyAttrs) {
     var formData = new FormData();
     formData.append('post_id', getPostId());
     formData.append('post_phases', JSON.stringify(postPhases));
@@ -76,14 +95,14 @@ function getApplicantFormData(postPhases,applyAttrs) {
 
 function clearApplyModal() {
     $('input[type=checkbox]:checked').each(function () {
-       $(this).attr('checked', false);
+        $(this).attr('checked', false);
     });
 
     $('input.form-control').each(function () {
         $(this).val('');
     });
     $('#apply_attr_info .form-group').each(function () {
-       $(this).removeClass('has-success').removeClass('has-error');
+        $(this).removeClass('has-success').removeClass('has-error');
     });
 
 }
@@ -91,10 +110,10 @@ function clearApplyModal() {
 function ajaxSubmitApplicant(url) {
     var postPhases = getSelectedPostPhases();
     var applyAttrs = getApplyAttrs();
-    if((getPostPhaseSum()>0 && postPhases.length==0)
-        || applyAttrs == false){
+    if ((getPostPhaseSum() > 0 && postPhases.length == 0)
+        || applyAttrs == false) {
         return;
-    }else {
+    } else {
         $('#btn_apply_post_submit').addClass('disabled');
         var formData = getApplicantFormData(postPhases, applyAttrs);
 
@@ -107,28 +126,27 @@ function ajaxSubmitApplicant(url) {
             data: formData,
             success: function (data) {
                 $('#btn_apply_post_submit').removeClass('disabled');
-                if (data.status == 'ok'){
+                if (data.status == 'ok') {
                     var apply_num = text($('#apply_num'));
                     var apply_num = Number(apply_num) + Number(1);
                     $('#apply_num').text(apply_num);
                     $('#apply_join').modal('hide');
                     clearApplyModal();
-                    console.log('flag:'+data.flag);
-                    swal("报名成功!", "报名信息已经发送到您的邮箱，请查收!", "success");
+                    swal("Success!", "申し込みいただき、ありがとうございます！", "success");
                     // success_prompt('报名成功！<br/>活动报名信息已经发送到您的邮箱，请查收！', 1500);
                     // window.location.reload();
-                }else{
-                    $('#apply-post-alert-danger').text('活动报名失败，您所处的网络不稳定！');
-                    fail_prompt('活动报名失败，您所处的网络不稳定！', 1500);
+                } else {
+                    $('#apply-post-alert-danger').text('ネットワークが不安定より、申し込みが完了していません！');
+                    fail_prompt('ネットワークが不安定より、申し込みが完了していません。！', 1500);
                     $('#apply-post-alert-danger').removeClass('hidden');
                     // window.location.reload();
                 }
             },
             error: function () {
                 $('#btn_apply_post_submit').removeClass('disabled');
-                $('#apply-post-alert-danger').text('您所处的网络不稳定！');
+                $('#apply-post-alert-danger').text('あなたは、ネットワークが不安定です！');
                 $('#apply-post-alert-danger').removeClass('hidden');
-                fail_prompt('活动报名失败，您所处的网络不稳定！', 1500);
+                fail_prompt('ネットワークが不安定より、申し込みが完了していません。！', 1500);
             }
         });
     }
@@ -148,22 +166,27 @@ $(document).ready(function () {
             var value = $.trim($(this).val());
             var name = $(this).attr('name');
             var isRequired = $(this).attr('required');
-            if(!isEmpty(isRequired) && isEmpty(value)){
-                $('#form_group_'+name).removeClass('has-success').addClass('has-error');
-                $('#help_block_'+name).removeClass('hidden');
-            }else{
-                $('#form_group_'+name).removeClass('has-error').addClass('has-success');
-                $('#help_block_'+name).addClass('hidden');
+            if (!isEmpty(isRequired) && isEmpty(value)) {
+                $('#form_group_' + name).removeClass('has-success').addClass('has-error');
+                $('#help_block_' + name).removeClass('hidden');
+            } else {
+                if (name == 'email' && !isEmail(value)) {
+                    $('#form_group_' + name).removeClass('has-success').addClass('has-error');
+                    $('#help_block_' + name + '_format_check').removeClass('hidden');
+                } else {
+                    $('#help_block_' + name + '_format_check').addClass('hidden');
+                    $('#form_group_' + name).removeClass('has-error').addClass('has-success');
+                    $('#help_block_' + name).addClass('hidden');
+                }
             }
         });
     });
 
     $('#btn_apply_post_submit').click(function () {
-        if($('#apply-post-alert-danger').hasClass('hidden')==false){
+        if ($('#apply-post-alert-danger').hasClass('hidden') == false) {
             $('#apply-post-alert-danger').addClass('hidden');
         }
         var url = $('form')[0].action;
-        console.log(url);
         ajaxSubmitApplicant(url);
     });
 

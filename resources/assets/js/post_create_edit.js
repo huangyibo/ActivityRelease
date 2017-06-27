@@ -45,13 +45,13 @@ function delPostPhaseAjax(postPhaseItemDivId, postPhaseId) {
         success: function (data) {
             if (data.status == 'ok') {
                 delPostPhaseNative(postPhaseItemDivId);
-                swal("删除成功!", "该活动阶段成功删除!", "success");
+                swal("正常に削除!", "活性相は正常に削除します!", "success");
             } else {
-                swal("活动阶段删除失败!", "您所处的网络不稳定！!", "error");
+                swal("活性相は削除できませんでした!", "あなたは、ネットワークが不安定です！", "error");
             }
         },
         error: function (e) {
-            swal("活动阶段删除失败!", "您所处的网络不稳定！!", "error");
+            swal("活性相は削除できませんでした!", "あなたは、ネットワークが不安定です！", "error");
         }
     });
 }
@@ -367,13 +367,13 @@ function ajaxCreatePost(url) {
                 var redirectUrl = '/posts/' + post.id;
                 window.location.href = redirectUrl;
             } else {
-                $('#post-alert-danger').text('活动发布失败，您所处的网络不稳定！');
+                $('#post-alert-danger').text('活動では、ネットワークが不安定であり、公開することができませんでした！！');
                 $('#post-alert-danger').removeClass('hidden');
             }
         },
         error: function (e) {
             $('#post-create-submit').removeClass('disabled');
-            $('#post-alert-danger').text('您所处的网络不稳定！');
+            $('#post-alert-danger').text('ネットワークが不安定でございいます！');
             $('#post-alert-danger').removeClass('hidden');
         }
     });
@@ -478,18 +478,18 @@ function ajaxUpdatePost(url) {
             $('#post-create-submit').removeClass('disabled');
             if(data.status == 'ok'){
                 var post = data.post;
-                swal("更新成功!", "该活动信息更新成功!", "success");
+                swal("Success!", "正常に更新活性プロフィール!", "success");
                 var redirectUrl = '/posts/' + post.id;
                 window.location.href = redirectUrl;
             }else {
-                swal("更新失败!", "您所处的网络不稳定!", "error");
+                swal("更新に失敗しました!", "あなたは、ネットワークが不安定です!", "error");
             }
         },
         error: function (e) {
             $('#post-create-submit').removeClass('disabled');
-            $('#post-alert-danger').text('您所处的网络不稳定！');
+            $('#post-alert-danger').text('あなたは、ネットワークが不安定です！');
             $('#post-alert-danger').removeClass('hidden');
-            swal("更新失败!", "您所处的网络不稳定!", "error");
+            swal("更新に失敗しました!", "あなたは、ネットワークが不安定です!", "error");
         }
     });
 }

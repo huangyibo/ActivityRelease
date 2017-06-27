@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div id="form_group_email" class="form-group">
                     <label for="" class="col-md-offset-1 col-sm-4 col-md-4 col-lg-4 control-label" style="width: 15%;">メールアドレス</label>
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <input class="form-control" id="email" name="email" type="email" placeholder="メールアドレス" required>
@@ -54,6 +54,7 @@
                         <span style="color: red;">*</span> 必須項目です。
                     </div>
                 </div>
+
 
                 <div class="form-group ">
                     <label for="" class="col-md-offset-1 col-sm-4 col-md-4 col-lg-4 control-label" style="width: 15%;">電話番号</label>

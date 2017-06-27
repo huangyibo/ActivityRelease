@@ -81,6 +81,14 @@
                                             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                                             <span>{{ $applyTemplate->apply_attr->attr_slug }}は必要項目です</span>
                                         </div>
+                                        @if($applyTemplate->apply_attr->attr_name == 'email')
+                                            <div id="help_block_{{ $applyTemplate->apply_attr->attr_name }}_format_check"
+                                                 class="help-block hidden">
+                                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                                <span>入力されたメールアドレスが有効ではありません</span>
+                                            </div>
+                                        @endif
+
                                     </div>
                                 @endforeach
                             </div>
