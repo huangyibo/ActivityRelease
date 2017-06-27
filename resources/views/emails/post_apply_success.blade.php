@@ -47,13 +47,13 @@
 
 </head>
 <body>
-尊敬的客户，恭喜您报名
-<a href="{{ route('posts.show', $post->id) }}"> {{ $post->title }} </a>成功!
+申し込みが完了しました！ありがとうございます！
+<a href="{{ route('posts.show', $post->id) }}"> {{ $post->title }} </a>Success!
 
 <div class="panel panel-default" style="width: 100%;text-align: center;">
     @if(isset($postPhases) && count($postPhases) > 0)
         <div class="panel-title panel-info" style="">
-            活动阶段详情
+            Detail
         </div>
         <div class="panel-body">
             <div class="table-responsive">
@@ -63,7 +63,7 @@
                     <tr>
                         <th>阶段名称</th>
                         <th style="width: 30%;">时间</th>
-                        <th>报名费用<br>(单位/日元)</th>
+                        <th>报名费用<br>(円)</th>
                         <th>名额限制</th>
                     </tr>
                     </thead>
@@ -71,7 +71,7 @@
                     @foreach($postPhases as $postPhase)
                         <tr>
                             <td title="{{ '第'.$postPhase->serial_num.'阶段' }}">
-                                {{ '第'.$postPhase->serial_num.'阶段' }}
+                                {{ '第'.$postPhase->serial_num.'部' }}
                             </td>
                             <td style="width: 30%;"
                                 title="{{ format_time($postPhase->start_time).'--'.format_time($postPhase->end_time) }}">
@@ -98,7 +98,7 @@
     <div class="panel panel-default" style="width: 100%;text-align: center;">
 
         <div class="panel-title">
-            活动报名详情
+            Detail
         </div>
         <div class="panel-body">
             <div class="table-responsive">
@@ -126,7 +126,7 @@
                                 @foreach($applicant->applicant_phases as $phase)
                                     @foreach($postPhases as $postPhase)
                                         @if($phase->post_phase_id == $postPhase->id)
-                                            {{ '第'.$postPhase->serial_num.'阶段' }}
+                                            {{ '第'.$postPhase->serial_num.'部' }}
                                         @endif
                                     @endforeach
                                     <br>
