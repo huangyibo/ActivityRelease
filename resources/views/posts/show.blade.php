@@ -189,7 +189,7 @@
             @endif--}}
 
             <div class="bg-white recomanded-box">
-                @include('_home_cell', ['section_title' => '今後のイベント', 'posts' => $posts])
+                @include('_home_cell', ['section_title' => 'おすすめ', 'posts' => $posts])
             </div>
 
 
