@@ -114,7 +114,7 @@ $(document).ready(function () {
                        /*$('#contact-us-alert-success').removeClass('hidden');
                        $('#contact-us-alert-success').text('Send Successfully!');*/
                        clearContactForm();
-                       swal("Success!", "あなたのメッセージが正常にコンサルティング会社の顧客サービスに送信されました!", "success");
+                       swal("Success!", "送信されました!ありがとうございます！", "success");
                    }else {
                        setErrorAlert("Submit Failed!");
                        swal("送信に失敗しました!", "お使いのネットワークが不安定で、後で再送信してください!", "error");
