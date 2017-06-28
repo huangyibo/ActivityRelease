@@ -55,14 +55,12 @@
                     </div>
                 </div>
 
-
-                <div class="form-group ">
+                <div class="form-group">
                     <label for="" class="col-md-offset-1 col-sm-4 col-md-4 col-lg-4 control-label" style="width: 15%;">電話番号</label>
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <input class="form-control" id="phone" name="phone" type="text">
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3 help-block">
-
                     </div>
                 </div>
 
