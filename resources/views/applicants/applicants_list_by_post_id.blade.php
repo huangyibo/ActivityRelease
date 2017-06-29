@@ -59,7 +59,12 @@
                     <thead>
                     <tr>
                         @foreach($applyTemplates as $applyTemplate)
-                            <th>{{ $applyTemplate->apply_attr->attr_slug }}</th>
+                            @if($applyTemplate->apply_attr->attr_name == 'email')
+                                <th style="width: 30%;">{{ $applyTemplate->apply_attr->attr_slug }}</th>
+                            @else
+                                <th>{{ $applyTemplate->apply_attr->attr_slug }}</th>
+                            @endif
+
                         @endforeach
                         <th>报名阶段</th>
 
@@ -69,7 +74,12 @@
                     @foreach($applicants as $applicant)
                         <tr>
                             @foreach($applyTemplates as $applyTemplate)
-                                <td>
+                                @if($applyTemplate->apply_attr->attr_name == 'email')
+                                    <td style="width:30%;">
+                                @else
+                                    <td>
+                                @endif
+
                                     @if(isset($applicant->applicant_details[$applyTemplate->apply_attr_id]))
                                         <a title="{{$applicant->applicant_details[$applyTemplate->apply_attr_id]}}">
                                             {{$applicant->applicant_details[$applyTemplate->apply_attr_id]}}
